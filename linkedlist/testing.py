@@ -10,12 +10,12 @@ class LinkedList:
         self.tail = new_node
         self.length = 1
 
-    def print_list(self):
+    def print_node(self):
         temp = self.head
         while temp is not None:
             print(temp.value)
             temp = temp.next
-    
+
     def append(self, value):
         new_node = Node(value)
         if self.length == 0:
@@ -25,27 +25,24 @@ class LinkedList:
             self.tail.next = new_node
             self.tail = new_node
         self.length += 1
+        return True
     
-    def prepend(self, value):
-        new_node = Node(value)
-        new_node.next = self.head
-        self.head = new_node
-        self.length += 1
-    
-    def get(self, index):
-        if index < 0 or index >= self.length:
+    def pop(self):
+        if self.length == 0:
             return None
         temp = self.head
-        for _ in range(index):
+        pre = self.head
+        while temp.next:
+            pre = temp
             temp = temp.next
+        temp.tail = pre
+        temp.next = None
+        self.length -= 1
+        if self.length == 0:
+            self.tail = None
+            self.head = None
         return temp
-
-
-my_linked_list = LinkedList(2)
-
-my_linked_list.append(3)
-my_linked_list.prepend(1)
-
-
-print(my_linked_list.get(2))
     
+
+
+
