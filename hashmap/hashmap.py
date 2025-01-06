@@ -21,10 +21,11 @@ class HashTable:
 
     def get_item(self,key):
         index = self.hash(key)
-        for i in range(len(self.data_map[index])):
-            if self.data_map[index][i][0] == key:
-                return self.data_map[index][i][1]
-        return None
+        if self.data_map[index] is not None:
+            for i in range(len(self.data_map[index])):
+                if self.data_map[index][i][0] == key:
+                    return self.data_map[index][i][1]
+            return None
     
     def keys(self):
         all_keys = []
