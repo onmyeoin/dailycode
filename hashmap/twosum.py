@@ -6,6 +6,4 @@ class Solution:
             if compliment in num_map:
                 return [num_map[compliment], i]
             num_map[num] = i 
-
-
-
+            
