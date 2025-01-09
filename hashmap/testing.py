@@ -9,8 +9,10 @@ class Solution:
                 my_set.remove(s[left])
                 left += 1
             my_set.add(s[right])
-            maxLen = max(maxLen, right - left +1)
+            maxLen = max(maxLen, right - left + 1)
+
         return maxLen
+
 
 s = "bbbb"
 s2 = "abcabcbb"
