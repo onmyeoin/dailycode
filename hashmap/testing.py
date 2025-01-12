@@ -1,23 +1,24 @@
-class Solution:
-    def lenLongestSubStr(self, s):
-        left = 0
-        maxLen = 0
-        my_set = set()
-
-        for right in range(len(s)):
-            while s[right] in my_set:
-                my_set.remove(s[left])
-                left += 1
-            my_set.add(s[right])
-            maxLen = max(maxLen, right - left + 1)
-
-        return maxLen
+import string
+paragraph = "a, a, a, a, b,b,b,c, c"
+banned = ["a"]
+clean_string = paragraph.translate(str.maketrans('','',string.punctuation))
+clean1 = clean_string.split(',')
+words = clean1.split()
+clean_words = []
 
 
-s = "bbbb"
-s2 = "abcabcbb"
-s3 = "pwwkew3ka99"
+print(words)
 
-solution = Solution()
+for word in words:
+    clean_words.append(word.lower())
 
-print(solution.lenLongestSubStr(s3))
+counts = {}
+for i in clean_words:
+    counts[i] = counts.get(i, 0) + 1
+
+
+for key in banned:
+    if key in counts:
+        counts.pop(key, None)
+
+print(max(counts, key=counts.get))
