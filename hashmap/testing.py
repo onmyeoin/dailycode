@@ -1,24 +1,15 @@
-import string
-paragraph = "a, a, a, a, b,b,b,c, c"
-banned = ["a"]
-clean_string = paragraph.translate(str.maketrans('','',string.punctuation))
-clean1 = clean_string.split(',')
-words = clean1.split()
-clean_words = []
+from collections import Counter
+import re
+
+def most_common_word(paragraph, banned):
+    clean_words = re.findall(r'\w+', paragraph.lower())
+    not_banned = [word for word in clean_words if word not in banned]
+    word_count = Counter(not_banned)
+    print(word_count.most_common(1)[0][0])
 
 
-print(words)
 
-for word in words:
-    clean_words.append(word.lower())
+paragraph = "Bob hit a ball, the hit BALL flew far after it was hit."
+banned = ["hit"]
 
-counts = {}
-for i in clean_words:
-    counts[i] = counts.get(i, 0) + 1
-
-
-for key in banned:
-    if key in counts:
-        counts.pop(key, None)
-
-print(max(counts, key=counts.get))
+most_common_word(paragraph, banned)
