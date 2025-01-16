@@ -32,17 +32,38 @@ Explanation: The ranges are:
 [8,9] --> "8->9"
 
 '''
+def summaryRanges(nums):
+    result = []
+    if not nums:
+        return result
 
-nums = [0,1,2,4,5,7]
-left = 0
-right = 0
-ranges = []
+    start = nums[0]
 
-nums[right+1]
-# for right in range(len(nums)):
-#     if len(nums) == 1:
-#         print(nums[right])
-#     if nums[right+1] == nums[left] + 1
+    for i in range(1, len(nums)):
+        # Check for a break in the sequence
+        if nums[i] != nums[i - 1] + 1:
+            # If the start is the same as the previous number, it's a single number
+            if start == nums[i - 1]:
+                result.append(f"{start}")
+            else:
+                result.append(f"{start}->{nums[i - 1]}")
+            # Update the start of the new range
+            start = nums[i]
+
+    # Add the last range
+    if start == nums[-1]:
+        result.append(f"{start}")
+    else:
+        result.append(f"{start}->{nums[-1]}")
+
+    return result
+
+# Example usage
+nums1 = [0, 1, 2, 4, 5, 7]
+nums2 = [0, 2, 3, 4, 6, 8, 9]
+
+print(summaryRanges(nums1))  # Output: ["0->2","4->5","7"]
+print(summaryRanges(nums2))  # Output: ["0","2->4","6","8->9"]
 
     
 
